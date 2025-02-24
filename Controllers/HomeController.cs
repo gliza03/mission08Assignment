@@ -78,7 +78,7 @@ namespace mission8Assignment.Controllers
             _context.Remove(deletedTask);
             _context.SaveChanges();
 
-            return RedirectToAction("TaskList")
+            return RedirectToAction("TaskList");
         }
 
     }
