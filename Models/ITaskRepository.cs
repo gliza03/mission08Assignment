@@ -2,6 +2,6 @@
 {
     public class ITaskRepository
     {
-        List<Task> Tasks { get; set; }
+        List<System.Threading.Tasks.Task> Tasks { get; set; }
     }
 }
