@@ -9,7 +9,7 @@ namespace mission8Assignment.Models
         public int TaskId { get; set; }
         [Required]
         public string TaskName { get; set; }
-        public string DueDate { get; set; }
+        public string? DueDate { get; set; }
         [Required]
         public string Quadrant { get; set; }
         [Required]
