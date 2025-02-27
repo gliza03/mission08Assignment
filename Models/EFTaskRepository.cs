@@ -1,9 +1,9 @@
 ﻿namespace mission8Assignment.Models
 {
-    public class EFTaskRepository : ITaskRepository
+    public class EfTaskRepository : ITaskRepository
     {
         private TaskContext _context;
-        public EFTaskRepository(TaskContext temp)
+        public EfTaskRepository(TaskContext temp)
         {
             _context = temp;
         }

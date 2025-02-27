@@ -1,7 +1,8 @@
 ﻿namespace mission8Assignment.Models
 {
-    public class ITaskRepository
+    public interface ITaskRepository
     {
-        List<System.Threading.Tasks.Task> Tasks { get; set; }
+        List<Task> Tasks { get; }
     }
+
 }

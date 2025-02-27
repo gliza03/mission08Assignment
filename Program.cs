@@ -9,9 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<TaskContext>(options =>
-{
-    options.UseSqlite(builder.Configuration["ConnectionStrings:TaskConnection"]);
-});
+    options.UseSqlite(builder.Configuration.GetConnectionString("TaskConnection")));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

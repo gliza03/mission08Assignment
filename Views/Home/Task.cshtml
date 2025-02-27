@@ -1,5 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model mission8Assignment.Models.Task
+
 @{
+    ViewData["Title"] = "Add Task";
 }
+
+<h2>Add A New Task</h2>
+
+<form asp-action="Task" method="post">
+    <div class="form-group">
+        <label asp-for="TaskName">Task Name</label>
+        <input asp-for="TaskName" class="form-control" />
+        <span asp-validation-for="TaskName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DueDate">Due Date</label>
+        <input asp-for="DueDate" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Quadrant">Quadrant</label>
+        <select asp-for="Quadrant" class="form-control" required>
+            <option value="">Select Quadrant</option>
+            <option value="1">Quadrant 1 (IMPORTANT and URGENT)</option>
+            <option value="2">Quadrant 2 (IMPORTANT and NOT URGENT)</option>
+            <option value="3">Quadrant 3 (NOT IMPORTANT and URGENT)</option>
+            <option value="4">Quadrant 4 (NOT IMPORTANT and NOT URGENT)</option>
+        </select>
+        <span asp-validation-for="Quadrant" class="text-danger"></span>
+    </div>
+
+    @*<div class="form-group">
+        <label asp-for="CategoryId">Category</label>
+        <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control" required>
+            <option value="">Select Category</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>*@
+
+    <div class="form-group">
+        <label>Completed</label><br />
+        <input type="radio" asp-for="CategoryId" name="Completed" value="true" /> Yes
+        <input type="radio" asp-for="CategoryId" name="Completed" value="false" checked /> No
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
