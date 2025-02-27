@@ -24,10 +24,10 @@ namespace mission8Assignment.Controllers
         public IActionResult Task()
         {
             ViewBag.Categories = _context.Categories.ToList();
-            return View(new Task());
+            return View(new Models.Task());
         }
         [HttpPost]
-        public IActionResult Task(Task task)
+        public IActionResult Task(Models.Task task)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace mission8Assignment.Controllers
             return View("Task", editedTask);
         }
         [HttpPost]
-        public IActionResult EditTask(Task editedTask)
+        public IActionResult EditTask(Models.Task editedTask)
         {
             _context.Update(editedTask);
             _context.SaveChanges();
@@ -73,7 +73,7 @@ namespace mission8Assignment.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(Task deletedTask)
+        public IActionResult Delete(Models.Task deletedTask)
         {
             _context.Remove(deletedTask);
             _context.SaveChanges();
