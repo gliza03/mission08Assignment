@@ -24,7 +24,7 @@ namespace mission8Assignment.Controllers
         public IActionResult Task()
         {
             ViewBag.Categories = _context.Categories.ToList();
-            return View();
+            return View(new mission8Assignment.Models.Task());
         }
         [HttpPost]
         public IActionResult Task(mission8Assignment.Models.Task task)
@@ -80,6 +80,38 @@ namespace mission8Assignment.Controllers
 
             return RedirectToAction("TaskList");
         }
+
+        // Quadrants view
+        public IActionResult Quadrants()
+        {
+            var tasks = _context.Tasks.Where(t => !t.Completed).ToList();
+
+            var viewModel = new QuadrantsViewModel
+            {
+                QuadrantI = tasks.Where(t => t.Quadrant == "Important / Urgent").ToList(),
+                QuadrantII = tasks.Where(t => t.Quadrant == "Important / Not Urgent").ToList(),
+                QuadrantIII = tasks.Where(t => t.Quadrant == "Not Important / Urgent").ToList(),
+                QuadrantIV = tasks.Where(t => t.Quadrant == "Not Important / Not Urgent").ToList(),
+            };
+
+            return View(viewModel);
+        }
+
+        // Mark task as completed
+        [HttpPost]
+        public IActionResult MarkComplete(int id)
+        {
+            var task = _context.Tasks.FirstOrDefault(t => t.TaskId == id);
+            if (task != null)
+            {
+                task.Completed = true;
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Quadrants");
+        }
+
+
+
 
     }
 }
