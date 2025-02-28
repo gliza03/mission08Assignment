@@ -40,6 +40,9 @@ namespace mission8Assignment.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("Completed")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("DueDate")
                         .HasColumnType("TEXT");
 

@@ -84,7 +84,7 @@ namespace mission8Assignment.Controllers
         // Quadrants view
         public IActionResult Quadrants()
         {
-            var tasks = _context.Tasks.Where(t => !t.Completed).ToList();
+            var tasks = _context.Tasks.Where(tasks => !tasks.Completed).ToList();
 
             var viewModel = new QuadrantsViewModel
             {
