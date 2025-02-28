@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<TaskContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("TaskConnection")));
+    options.UseSqlite("Data Source=mission8.db"));
 
 var app = builder.Build();
 

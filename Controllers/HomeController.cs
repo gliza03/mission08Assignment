@@ -2,6 +2,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using mission8Assignment.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace mission8Assignment.Controllers
 {
@@ -29,6 +31,13 @@ namespace mission8Assignment.Controllers
         [HttpPost]
         public IActionResult Task(mission8Assignment.Models.Task task)
         {
+            if (!ModelState.IsValid)
+            {
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+            }
             if (ModelState.IsValid)
             {
                 _context.Tasks.Add(task);
@@ -36,16 +45,11 @@ namespace mission8Assignment.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Genres = _context.Categories.ToList();
+            ViewBag.Categories = _context.Categories.ToList();
             return View(task);
         }
 
         // Show task list
-        public IActionResult TaskList()
-        {
-            var list = _context.Tasks.ToList();
-            return View(list);
-        }
 
         // Edit
         [HttpGet]
@@ -84,7 +88,11 @@ namespace mission8Assignment.Controllers
         // Quadrants view
         public IActionResult Quadrants()
         {
-            var tasks = _context.Tasks.Where(tasks => !tasks.Completed).ToList();
+            // Include the Category table to load Category data along with the tasks
+            var tasks = _context.Tasks
+                .Include(t => t.Category) // This line adds the join to Category table
+                .Where(t => !t.Completed)  // Only get tasks that are not completed
+                .ToList();
 
             var viewModel = new QuadrantsViewModel
             {
@@ -96,6 +104,7 @@ namespace mission8Assignment.Controllers
 
             return View(viewModel);
         }
+
 
         // Mark task as completed
         [HttpPost]

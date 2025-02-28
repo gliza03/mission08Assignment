@@ -7,16 +7,23 @@ namespace mission8Assignment.Models
     {
         [Key]
         public int TaskId { get; set; }
+
         [Required]
         public string TaskName { get; set; }
+
         public string? DueDate { get; set; }
+
         [Required]
         public string Quadrant { get; set; }
+
+        // Foreign Key
         [Required]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
 
-        // track task completion
+        // Removed the Category navigation property as per your request
+        public Category Category { get; set; }
+        // Track task completion
         public bool Completed { get; set; } = false;
     }
+
 }
