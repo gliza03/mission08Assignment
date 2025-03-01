@@ -40,7 +40,7 @@ namespace mission8Assignment.Controllers
 
             _context.Tasks.Add(task);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Quadrants");
         }
 
         // Show task list
@@ -59,7 +59,7 @@ namespace mission8Assignment.Controllers
             _context.Update(editedTask);
             _context.SaveChanges();
 
-            return RedirectToAction("Task");
+            return RedirectToAction("Quadrants");
         }
 
         // Delete

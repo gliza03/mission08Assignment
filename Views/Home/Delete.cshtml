@@ -4,16 +4,29 @@
     ViewData["Title"] = "Delete Task";
 }
 
-<h2>Are You Sure You Want to Delete This Task?</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Are You Sure You Want to Delete This Task?</h2>
 
-<div>
-    
-    
-    <form method="post">
-        <!-- Hidden input for TaskId to pass it to the post method -->
-        <input type="hidden" asp-for="TaskId" />
+            <div class="card">
+                <div class="card-body">
+                    
+                    <form method="post">
+                        <!-- Hidden input for TaskId to pass it to the post method -->
+                        <input type="hidden" asp-for="TaskId" />
 
-        <button class="btn btn-danger" type="submit">Delete</button>
-        <a class="btn btn-primary" asp-controller="Home" asp-action="Quadrants">Cancel</a>
-    </form>
+                        <div class="d-flex justify-content-between">
+                            <!-- Delete button -->
+                            <button class="btn btn-danger" type="submit">Delete</button>
+
+                            <!-- Cancel button -->
+                            <a class="btn btn-primary" asp-controller="Home" asp-action="Quadrants">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
