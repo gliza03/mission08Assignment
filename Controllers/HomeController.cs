@@ -54,9 +54,9 @@ namespace mission8Assignment.Controllers
             return View("Task", editedTask);
         }
         [HttpPost]
-        public IActionResult EditTask(mission8Assignment.Models.Task editedTask)
+        public IActionResult EditTask(mission8Assignment.Models.Task taskToEdit)
         {
-            _context.Update(editedTask);
+            _context.Update(taskToEdit);
             _context.SaveChanges();
 
             return RedirectToAction("Quadrants");
