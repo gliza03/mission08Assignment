@@ -16,7 +16,7 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.CategoryId
+                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
                         </div>
                         <div class="btn-group">
                             <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
@@ -39,7 +39,7 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.CategoryId
+                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
                         </div>
                         <div class="btn-group">
                             <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
@@ -64,7 +64,7 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.CategoryId
+                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
                         </div>
                         <div class="btn-group">
                             <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
@@ -87,7 +87,7 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.CategoryId
+                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
                         </div>
                         <div class="btn-group">
                             <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
