@@ -15,7 +15,7 @@ namespace mission8Assignment.Models
         public string TaskName { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; } = DateTime.Today;
 
         [Required]
         public string Quadrant { get; set; }
