@@ -7,131 +7,108 @@
 <h2 class="text-center mb-4">Task Quadrants</h2>
 
 <div class="container">
-    <div class="row">
-        <!-- Left Header for "Important" -->
-        <div class="col-md-2 d-flex align-items-center justify-content-center">
-            <h4 class="text-center text-uppercase">Important</h4>
-        </div>
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th></th> <!-- Empty cell for row header spacing -->
+                <th class="bg-dark text-white">Urgent</th>
+                <th class="bg-dark text-white">Non-Urgent</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Important Row -->
+            <tr>
+                <td class="align-middle bg-light"><strong>Important</strong></td>
+                <td>
+                    <h3 class="bg-danger text-white p-2">Quadrant 1</h3>
+                    <ul class="list-group">
+                        @foreach (var task in Model.QuadrantI)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
+                                </div>
+                                <div class="btn-group">
+                                    <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="@Url.Action("Delete", "Home", new { id = task.TaskId })" class="btn btn-sm btn-danger">Delete</a>
+                                    <form method="post" asp-action="MarkComplete" asp-controller="Home" class="d-inline">
+                                        <input type="hidden" name="id" value="@task.TaskId" />
+                                        <button type="submit" class="btn btn-sm btn-success">Complete</button>
+                                    </form>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <h3 class="bg-primary text-white p-2">Quadrant 2</h3>
+                    <ul class="list-group">
+                        @foreach (var task in Model.QuadrantII)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
+                                </div>
+                                <div class="btn-group">
+                                    <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="@Url.Action("Delete", "Home", new { id = task.TaskId })" class="btn btn-sm btn-danger">Delete</a>
+                                    <form method="post" asp-action="MarkComplete" asp-controller="Home" class="d-inline">
+                                        <input type="hidden" name="id" value="@task.TaskId" />
+                                        <button type="submit" class="btn btn-sm btn-success">Complete</button>
+                                    </form>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </td>
+            </tr>
 
-        <!-- Quadrant Headers: Urgent / Non-Urgent -->
-        <div class="col-md-5 text-center">
-            <h4 class="bg-dark text-white p-2">Urgent</h4>
-        </div>
-        <div class="col-md-5 text-center">
-            <h4 class="bg-dark text-white p-2">Non-Urgent</h4>
-        </div>
-    </div>
-
-    <!-- Row for Quadrants 1 & 2 (Important) -->
-    <div class="row">
-        <div class="col-md-2 d-flex align-items-center justify-content-center">
-            <h5 class="text-center">Quadrant 1</h5>
-        </div>
-        <div class="col-md-5">
-            <h5 class="bg-danger text-white p-2 text-center">Important / Urgent</h5>
-            <ul class="list-group">
-                @foreach (var task in Model.QuadrantI)
-                {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
-                        </div>
-                        <div class="btn-group">
-                            <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="@Url.Action("Delete", "Home", new { id = task.TaskId })" class="btn btn-sm btn-danger">Delete</a>
-                            <form method="post" asp-action="MarkComplete" asp-controller="Home" class="d-inline">
-                                <input type="hidden" name="id" value="@task.TaskId" />
-                                <button type="submit" class="btn btn-sm btn-success">Complete</button>
-                            </form>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col-md-5">
-            <h5 class="bg-primary text-white p-2 text-center">Important / Non-Urgent</h5>
-            <ul class="list-group">
-                @foreach (var task in Model.QuadrantII)
-                {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
-                        </div>
-                        <div class="btn-group">
-                            <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="@Url.Action("Delete", "Home", new { id = task.TaskId })" class="btn btn-sm btn-danger">Delete</a>
-                            <form method="post" asp-action="MarkComplete" asp-controller="Home" class="d-inline">
-                                <input type="hidden" name="id" value="@task.TaskId" />
-                                <button type="submit" class="btn btn-sm btn-success">Complete</button>
-                            </form>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-    </div>
-
-    <!-- Row Header for "Not Important" -->
-    <div class="row mt-4">
-        <div class="col-md-2 d-flex align-items-center justify-content-center">
-            <h4 class="text-center text-uppercase">Not Important</h4>
-        </div>
-        <div class="col-md-5 text-center">
-            <h4 class="bg-dark text-white p-2">Urgent</h4>
-        </div>
-        <div class="col-md-5 text-center">
-            <h4 class="bg-dark text-white p-2">Non-Urgent</h4>
-        </div>
-    </div>
-
-    <!-- Row for Quadrants 3 & 4 (Not Important) -->
-    <div class="row">
-        <div class="col-md-2 d-flex align-items-center justify-content-center">
-            <h5 class="text-center">Quadrant 3</h5>
-        </div>
-        <div class="col-md-5">
-            <h5 class="bg-warning text-dark p-2 text-center">Not Important / Urgent</h5>
-            <ul class="list-group">
-                @foreach (var task in Model.QuadrantIII)
-                {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
-                        </div>
-                        <div class="btn-group">
-                            <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="@Url.Action("Delete", "Home", new { id = task.TaskId })" class="btn btn-sm btn-danger">Delete</a>
-                            <form method="post" asp-action="MarkComplete" asp-controller="Home" class="d-inline">
-                                <input type="hidden" name="id" value="@task.TaskId" />
-                                <button type="submit" class="btn btn-sm btn-success">Complete</button>
-                            </form>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-
-        <div class="col-md-5">
-            <h5 class="bg-secondary text-white p-2 text-center">Not Important / Non-Urgent</h5>
-            <ul class="list-group">
-                @foreach (var task in Model.QuadrantIV)
-                {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
-                        </div>
-                        <div class="btn-group">
-                            <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="@Url.Action("Delete", "Home", new { id = task.TaskId })" class="btn btn-sm btn-danger">Delete</a>
-                            <form method="post" asp-action="MarkComplete" asp-controller="Home" class="d-inline">
-                                <input type="hidden" name="id" value="@task.TaskId" />
-                                <button type="submit" class="btn btn-sm btn-success">Complete</button>
-                            </form>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-    </div>
+            <!-- Not Important Row -->
+            <tr>
+                <td class="align-middle bg-light"><strong>Not Important</strong></td>
+                <td>
+                    <h3 class="bg-warning text-dark p-2">Quadrant 3</h3>
+                    <ul class="list-group">
+                        @foreach (var task in Model.QuadrantIII)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
+                                </div>
+                                <div class="btn-group">
+                                    <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="@Url.Action("Delete", "Home", new { id = task.TaskId })" class="btn btn-sm btn-danger">Delete</a>
+                                    <form method="post" asp-action="MarkComplete" asp-controller="Home" class="d-inline">
+                                        <input type="hidden" name="id" value="@task.TaskId" />
+                                        <button type="submit" class="btn btn-sm btn-success">Complete</button>
+                                    </form>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <h3 class="bg-secondary text-white p-2">Quadrant 4</h3>
+                    <ul class="list-group">
+                        @foreach (var task in Model.QuadrantIV)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>@task.TaskName</strong> (Due: @task.DueDate) - @task.Category.CategoryName
+                                </div>
+                                <div class="btn-group">
+                                    <a href="@Url.Action("EditTask", "Home", new { id = task.TaskId })" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="@Url.Action("Delete", "Home", new { id = task.TaskId })" class="btn btn-sm btn-danger">Delete</a>
+                                    <form method="post" asp-action="MarkComplete" asp-controller="Home" class="d-inline">
+                                        <input type="hidden" name="id" value="@task.TaskId" />
+                                        <button type="submit" class="btn btn-sm btn-success">Complete</button>
+                                    </form>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
