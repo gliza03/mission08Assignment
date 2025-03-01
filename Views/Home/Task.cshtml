@@ -7,6 +7,9 @@
 <h2>Add A New Task</h2>
 
 <form asp-action="Task" method="post">
+
+    <input type="hidden" asp-for="TaskId"/>
+
     <div class="form-group">
         <label asp-for="TaskName">Task Name</label>
         <input asp-for="TaskName" class="form-control" />

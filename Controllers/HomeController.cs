@@ -31,22 +31,16 @@ namespace mission8Assignment.Controllers
         [HttpPost]
         public IActionResult Task(mission8Assignment.Models.Task task)
         {
+
             if (!ModelState.IsValid)
             {
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Console.WriteLine(error.ErrorMessage);
-                }
-            }
-            if (ModelState.IsValid)
-            {
-                _context.Tasks.Add(task);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.Categories = _context.Categories.ToList();
+                return View(task);
             }
 
-            ViewBag.Categories = _context.Categories.ToList();
-            return View(task);
+            _context.Tasks.Add(task);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // Show task list
@@ -82,7 +76,7 @@ namespace mission8Assignment.Controllers
             _context.Remove(deletedTask);
             _context.SaveChanges();
 
-            return RedirectToAction("TaskList");
+            return RedirectToAction("Quadrants");
         }
 
         // Quadrants view
