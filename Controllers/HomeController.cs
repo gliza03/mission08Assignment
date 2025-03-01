@@ -31,14 +31,25 @@ namespace mission8Assignment.Controllers
         [HttpPost]
         public IActionResult Task(mission8Assignment.Models.Task task)
         {
-
             if (!ModelState.IsValid)
             {
                 ViewBag.Categories = _context.Categories.ToList();
                 return View(task);
             }
 
-            _context.Tasks.Add(task);
+            if (task.TaskId == 0)  // New Task (Insert)
+            {
+                _context.Tasks.Add(task);
+            }
+            else  // Existing Task (Update)
+            {
+                var existingTask = _context.Tasks.Find(task.TaskId);
+                if (existingTask != null)
+                {
+                    _context.Entry(existingTask).CurrentValues.SetValues(task);
+                }
+            }
+
             _context.SaveChanges();
             return RedirectToAction("Quadrants");
         }
