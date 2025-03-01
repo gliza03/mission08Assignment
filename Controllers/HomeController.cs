@@ -70,19 +70,31 @@ namespace mission8Assignment.Controllers
 
         // Delete
         [HttpGet]
+        // GET: Home/Delete/5
         public IActionResult Delete(int id)
         {
-            var deletedTask = _context.Tasks.Single(x => x.TaskId == id);
-            return View(deletedTask);
+            var task = _context.Tasks.FirstOrDefault(t => t.TaskId == id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            return View(task); // Pass the task to the view
         }
 
+// POST: Home/Delete/5
         [HttpPost]
-        public IActionResult Delete(mission8Assignment.Models.Task deletedTask)
+        [ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
         {
-            _context.Remove(deletedTask);
-            _context.SaveChanges();
+            var task = _context.Tasks.FirstOrDefault(t => t.TaskId == id);
+            if (task != null)
+            {
+                _context.Tasks.Remove(task);
+                _context.SaveChanges();
+            }
 
-            return RedirectToAction("TaskList");
+            return RedirectToAction("Quadrants"); // Redirect to the Quadrants page after deletion
         }
 
         // Quadrants view

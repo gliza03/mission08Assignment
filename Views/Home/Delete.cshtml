@@ -1,3 +1,19 @@
-﻿
+﻿@model mission8Assignment.Models.Task
+
 @{
+    ViewData["Title"] = "Delete Task";
 }
+
+<h2>Are You Sure You Want to Delete This Task?</h2>
+
+<div>
+    
+    
+    <form method="post">
+        <!-- Hidden input for TaskId to pass it to the post method -->
+        <input type="hidden" asp-for="TaskId" />
+
+        <button class="btn btn-danger" type="submit">Delete</button>
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Quadrants">Cancel</a>
+    </form>
+</div>
