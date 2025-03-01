@@ -20,3 +20,61 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.form-group {
+  margin-bottom: 1.5rem; /* Add spacing between fields */
+  position: relative; /* Allows custom animations */
+}
+
+.form-group label {
+  font-weight: bold; /* Make labels pop */
+  margin-bottom: 0.5rem;
+  display: block; /* Keeps labels above input fields */
+  color: #333; /* Dark text for contrast */
+  letter-spacing: 0.8px;
+  text-transform: uppercase; /* Fancy little style */
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #f8f9fa; /* Light background */
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #198754; /* Bootstrap Green */
+  box-shadow: 0 0 10px rgba(25, 135, 84, 0.4);
+  background: #ffffff; /* Make input pop on focus */
+}
+
+.form-group .text-danger {
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  display: block;
+  color: #dc3545; /* Bootstrap red error color */
+}
+
+button {
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  font-weight: bold;
+}
+
+button:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  background: #157347; /* Darker green on hover */
+}
+
+.navbar-nav .nav-item .nav-link {
+  font-weight: bold;
+}
+

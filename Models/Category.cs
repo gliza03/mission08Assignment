@@ -6,7 +6,9 @@ namespace mission8Assignment.Models
     {
         [Key]
         public int CategoryId { get; set; }
+
         [Required]
         public string CategoryName { get; set; }
     }
+
 }

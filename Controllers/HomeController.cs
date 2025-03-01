@@ -2,6 +2,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using mission8Assignment.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace mission8Assignment.Controllers
 {
@@ -29,23 +31,19 @@ namespace mission8Assignment.Controllers
         [HttpPost]
         public IActionResult Task(mission8Assignment.Models.Task task)
         {
-            if (ModelState.IsValid)
+
+            if (!ModelState.IsValid)
             {
-                _context.Tasks.Add(task);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.Categories = _context.Categories.ToList();
+                return View(task);
             }
 
-            ViewBag.Genres = _context.Categories.ToList();
-            return View(task);
+            _context.Tasks.Add(task);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // Show task list
-        public IActionResult TaskList()
-        {
-            var list = _context.Tasks.ToList();
-            return View(list);
-        }
 
         // Edit
         [HttpGet]
@@ -66,25 +64,41 @@ namespace mission8Assignment.Controllers
 
         // Delete
         [HttpGet]
+        // GET: Home/Delete/5
         public IActionResult Delete(int id)
         {
-            var deletedTask = _context.Tasks.Single(x => x.TaskId == id);
-            return View(deletedTask);
+            var task = _context.Tasks.FirstOrDefault(t => t.TaskId == id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            return View(task); // Pass the task to the view
         }
 
+// POST: Home/Delete/5
         [HttpPost]
-        public IActionResult Delete(mission8Assignment.Models.Task deletedTask)
+        [ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
         {
-            _context.Remove(deletedTask);
-            _context.SaveChanges();
+            var task = _context.Tasks.FirstOrDefault(t => t.TaskId == id);
+            if (task != null)
+            {
+                _context.Tasks.Remove(task);
+                _context.SaveChanges();
+            }
 
-            return RedirectToAction("TaskList");
+            return RedirectToAction("Quadrants"); // Redirect to the Quadrants page after deletion
         }
 
         // Quadrants view
         public IActionResult Quadrants()
         {
-            var tasks = _context.Tasks.Where(t => !t.Completed).ToList();
+            // Include the Category table to load Category data along with the tasks
+            var tasks = _context.Tasks
+                .Include(t => t.Category) // This line adds the join to Category table
+                .Where(t => !t.Completed)  // Only get tasks that are not completed
+                .ToList();
 
             var viewModel = new QuadrantsViewModel
             {
@@ -96,6 +110,7 @@ namespace mission8Assignment.Controllers
 
             return View(viewModel);
         }
+
 
         // Mark task as completed
         [HttpPost]
