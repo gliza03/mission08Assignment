@@ -4,64 +4,71 @@
     ViewData["Title"] = "Add Task";
 }
 
-<h2>Add A New Task</h2>
+<h2 class="text-center mb-4">Add A New Task</h2>
 
-<form asp-action="Task" method="post">
+<div class="container">
+    <form asp-action="Task" method="post" class="row g-3">
+        <input type="hidden" asp-for="TaskId" />
 
-    <input type="hidden" asp-for="TaskId"/>
+        <div class="col-md-6">
+            <label asp-for="TaskName" class="form-label">Task Name</label>
+            <input asp-for="TaskName" class="form-control" />
+            <span asp-validation-for="TaskName" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="TaskName">Task Name</label>
-        <input asp-for="TaskName" class="form-control" />
-        <span asp-validation-for="TaskName" class="text-danger"></span>
-    </div>
+        <div class="col-md-6">
+            <label asp-for="DueDate" class="form-label">Due Date</label>
+            <input asp-for="DueDate" type="date" class="form-control" />
+        </div>
 
-    <div class="form-group">
-        <label asp-for="DueDate">Due Date</label>
-        <input asp-for="DueDate" type="date" class="form-control" />
-    </div>
+        <div class="col-md-6">
+            <label asp-for="Quadrant" class="form-label">Quadrant</label>
+            <select asp-for="Quadrant" class="form-select" required>
+                <option value="">Select Quadrant</option>
+                <option value="Important / Urgent">Quadrant 1 (IMPORTANT and URGENT)</option>
+                <option value="Important / Not Urgent">Quadrant 2 (IMPORTANT and NOT URGENT)</option>
+                <option value="Not Important / Urgent">Quadrant 3 (NOT IMPORTANT and URGENT)</option>
+                <option value="Not Important / Not Urgent">Quadrant 4 (NOT IMPORTANT and NOT URGENT)</option>
+            </select>
+            <span asp-validation-for="Quadrant" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Quadrant">Quadrant</label>
-        <select asp-for="Quadrant" class="form-control" required>
-            <option value="">Select Quadrant</option>
-            <option value="Important / Urgent">Quadrant 1 (IMPORTANT and URGENT)</option>
-            <option value="Important / Not Urgent">Quadrant 2 (IMPORTANT and NOT URGENT)</option>
-            <option value="Not Important / Urgent">Quadrant 3 (NOT IMPORTANT and URGENT)</option>
-            <option value="Not Important / Not Urgent">Quadrant 4 (NOT IMPORTANT and NOT URGENT)</option>
-        </select>
-        <span asp-validation-for="Quadrant" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="CategoryId">Category</label>
-        <select asp-for="CategoryId" class="form-control">
-            <option value="">-- Select Category --</option>
-            @if (ViewBag.Categories != null && ViewBag.Categories.Count > 0)
-            {
-                foreach (var cat in ViewBag.Categories)
+        <div class="col-md-6">
+            <label for="CategoryId" class="form-label">Category</label>
+            <select asp-for="CategoryId" class="form-select">
+                <option value="">-- Select Category --</option>
+                @if (ViewBag.Categories != null && ViewBag.Categories.Count > 0)
                 {
-                    <option value="@cat.CategoryId">@cat.CategoryName</option>
+                    foreach (var cat in ViewBag.Categories)
+                    {
+                        <option value="@cat.CategoryId">@cat.CategoryName</option>
+                    }
                 }
-            }
-            else
-            {
-                <option value="1">Home</option>
-                <option value="2">School</option>
-                <option value="3">Work</option>
-                <option value="4">Church</option>
-            }
-        </select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
-    </div>
+                else
+                {
+                    <option value="1">Home</option>
+                    <option value="2">School</option>
+                    <option value="3">Work</option>
+                    <option value="4">Church</option>
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label>Completed</label><br />
-    </div>
-    <div>
-        <input type="radio" asp-for="Completed" value="true" /> Yes
-        <input type="radio" asp-for="Completed" value="false" checked /> No
-    </div>
+        <div class="col-12">
+            <label class="form-label">Completed</label><br />
+            <div class="form-check form-check-inline">
+                <input type="radio" asp-for="Completed" value="true" class="form-check-input" />
+                <label class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" asp-for="Completed" value="false" checked class="form-check-input" />
+                <label class="form-check-label">No</label>
+            </div>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
